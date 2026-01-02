@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Soulful Journey — Explore India</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      :root {
+        --bg: #071028;
+        /* page base (if images fail) */
+        --card: rgba(255, 255, 255, 0.06);
+        --muted: rgba(255, 255, 255, 0.75);
+        --accent1: #ff8a00;
+        /* warm sunset orange */
+        --accent2: #ff5e9e;
+        /* warm magenta */
+        --glass: rgba(255, 255, 255, 0.04);
+        --radius: 14px;
+        --text: #eef6ff;
+        --shadow: 0 8px 30px rgba(6, 8, 15, 0.6);
+        --max-width: 1200px;
+      }
+      /* 👇 FIXED LIGHT MODE VARIABLES 👇 */
+      body.light {
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        /* Use solid white for better contrast as primary card background */
+        --muted: rgba(12, 17, 23, 0.65);
+        --glass: rgba(0, 0, 0, 0.04);
+        --text: #061428;
+        --shadow: 0 8px 30px rgba(10, 10, 10, 0.06);
+      }
+      /* 👆 FIXED LIGHT MODE VARIABLES 👆 */
+      body {
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+          Arial;
+        background: var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.4;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+      }
+      /* =================== Global layout =================== */
+      .wrap {
+        max-width: var(--max-width);
+        margin: 36px auto;
+        padding: 20px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 26px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .logo {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--accent1), var(--accent2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        color: #08101a;
+        font-size: 20px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      }
+      h1 {
+        font-size: 20px;
+      }
+      .subtitle {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .nav-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .btn {
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        padding: 8px 12px;
+        border-radius: 10px;
+        color: var(--text);
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .btn.primary {
+        background: linear-gradient(90deg, var(--accent1), var(--accent2));
+        color: #08101a;
+        border: none;
+        box-shadow: 0 8px 24px rgba(255, 130, 90, 0.12);
+      }
+      .ghost {
+        background: transparent;
+        border: 1px dashed rgba(255, 255, 255, 0.06);
+      }
+      body.light .ghost {
+        border: 1px dashed rgba(0, 0, 0, 0.1);
+        /* Better visibility in light mode */
+      }
+      /* =================== Sections (full-bleed backgrounds) =================== */
+      section {
+        padding: 64px 20px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+      .section-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+      .hero {
+        min-height: 480px;
+        display: flex;
+        align-items: center;
+        border-radius: 18px;
+        margin-bottom: 12px;
+      }
+      .discover {
+        min-height: 520px;
+        border-radius: 18px;
+      }
+      .planner {
+        min-height: 420px;
+        border-radius: 18px;
+      }
+      .blog {
+        min-height: 460px;
+        border-radius: 18px;
+      }
+      .map-section {
+        min-height: 420px;
+        border-radius: 18px;
+      }
+      /* backgrounds (cover) */
+      .bg-hero {
+        background-image: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.26),
+            rgba(0, 0, 0, 0.15)
+          ),
+          url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+      }
+      .bg-discover {
+        background-image: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.24),
+            rgba(0, 0, 0, 0.28)
+          ),
+          url("https://images.unsplash.com/photo-1504197887-1b7e3b03b8f1?q=80&w=1600&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+      }
+      .bg-planner {
+        background-image: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.18),
+            rgba(0, 0, 0, 0.22)
+          ),
+          url("https://images.unsplash.com/photo-1482192505345-5655af888cc4?q=80&w=1600&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+      }
+      .bg-blog {
+        background-image: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.28)
+          ),
+          url("https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+      }
+      .bg-map {
+        background-image: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.16),
+            rgba(0, 0, 0, 0.18)
+          ),
+          url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+      }
+      /* overlay glass container inside sections */
+      .glass {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.01)
+        );
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      /* 👇 FIXED LIGHT MODE VARIABLES 👇 */
+      body.light .glass {
+        background: rgba(255, 255, 255, 0.8);
+        /* Semi-transparent white */
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        /* Light border */
+      }
+      /* 👆 FIXED LIGHT MODE VARIABLES 👆 */
+      /* =================== Discover grid =================== */
+      .places-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 20px;
+      }
+      .place-card {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent);
+        border-radius: 12px;
+        padding: 12px;
+        min-height: 230px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      /* 👇 FIX: Updated light mode place card style 👇 */
+      body.light .place-card {
+        background: var(--card);
+        /* Should be white */
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        /* Light gray border */
+      }
+      /* 👆 FIX: Updated light mode place card style 👆 */
+      .place-thumb {
+        height: 140px;
+        border-radius: 10px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      }
+      .place-meta {
+        margin-top: 8px;
+      }
+      .place-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      /* rating badge */
+
+      .rating {
+        background: linear-gradient(90deg, var(--accent1), var(--accent2));
+
+        padding: 6px 10px;
+
+        border-radius: 10px;
+
+        color: #08101a;
+
+        font-weight: 700;
+      }
+
+      /* action row */
+
+      .actions {
+        display: flex;
+
+        gap: 8px;
+
+        flex-wrap: wrap;
+      }
+
+      .actions .btn {
+        padding: 8px 10px;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+      }
+
+      /* FIX: Button update for light mode */
+
+      body.light .btn {
+        background: var(--card);
+
+        /* use solid white for light buttons */
+
+        border: 1px solid rgba(0, 0, 0, 0.1);
+
+        color: var(--text);
+      }
+
+      /* =================== Planner / visit list / blog list =================== */
+
+      .planner-grid {
+        display: grid;
+
+        grid-template-columns: 2fr 1fr;
+
+        gap: 18px;
+
+        margin-top: 20px;
+      }
+
+      .visit-list {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        max-height: 320px;
+
+        overflow: auto;
+
+        padding-right: 6px;
+      }
+
+      .visit-item {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 8px;
+
+        border-radius: 8px;
+
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      /* 👇 FIX: Updated light mode visit item background 👇 */
+
+      body.light .visit-item {
+        background: rgba(0, 0, 0, 0.03);
+
+        /* Light gray background */
+      }
+
+      /* 👆 FIX: Updated light mode visit item background 👆 */
+
+      .calendar-row {
+        display: flex;
+
+        gap: 8px;
+
+        align-items: center;
+      }
+
+      .input {
+        padding: 10px;
+
+        border-radius: 10px;
+
+        border: none;
+
+        background: rgba(0, 0, 0, 0.06);
+
+        color: var(--text);
+
+        min-width: 0;
+      }
+
+      /* FIX: Input field style for light mode */
+
+      body.light .input {
+        background: rgba(0, 0, 0, 0.06);
+
+        /* Keeps the light gray input field */
+
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      /* =================== Blog cards =================== */
+
+      .blog-cards {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 14px;
+
+        margin-top: 16px;
+      }
+
+      .blog-card {
+        border-radius: 10px;
+
+        padding: 12px;
+
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          transparent
+        );
+
+        min-height: 140px;
+      }
+
+      /* 👇 FIX: Updated light mode blog card style 👇 */
+
+      body.light .blog-card {
+        background: var(--card);
+
+        /* Should be white */
+
+        border: 1px solid rgba(0, 0, 0, 0.06);
+
+        /* Light gray border */
+      }
+
+      /* 👆 FIX: Updated light mode blog card style 👆 */
+
+      /* =================== Map frame =================== */
+
+      .map-frame {
+        width: 100%;
+
+        height: 420px;
+
+        border-radius: 12px;
+
+        border: none;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      /* =================== Floating chat widget =================== */
+
+      .chat-widget {
+        position: fixed;
+
+        right: 24px;
+
+        bottom: 24px;
+
+        width: 64px;
+
+        height: 64px;
+
+        border-radius: 999px;
+
+        background: linear-gradient(90deg, var(--accent1), var(--accent2));
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        color: #08101a;
+
+        z-index: 60;
+
+        cursor: pointer;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      }
+
+      .chat-panel {
+        position: fixed;
+
+        right: 24px;
+
+        bottom: 100px;
+
+        width: 360px;
+
+        /* FIX: Use --card in dark mode, but transparent white for light mode */
+
+        background: var(--card);
+
+        border-radius: 12px;
+
+        padding: 12px;
+
+        box-shadow: var(--shadow);
+
+        z-index: 61;
+
+        display: flex;
+
+        flex-direction: column;
+
+        overflow: hidden;
+
+        /* min-height: 400px; */
+
+        /* REMOVED MIN-HEIGHT TO PREVENT CHAT FROM OVERFLOWING VIEWPORT ON SMALL SCREENS, BUT RELYING ON FLEX BELOW */
+
+        height: 50vh;
+
+        /* Set a consistent height relative to the viewport */
+
+        max-height: 500px;
+
+        /* Optional: Set a maximum height for larger screens */
+      }
+
+      body.light .chat-panel {
+        background: rgba(255, 255, 255, 0.95);
+
+        /* Better visibility on light mode */
+
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .chat-messages {
+        flex: 1;
+
+        /* This is the key. Allows the message container to grow and take all available space */
+
+        overflow-y: auto;
+
+        /* ENABLE VERTICAL SCROLLING */
+
+        padding: 8px;
+
+        display: flex;
+
+        flex-direction: column;
+      }
+
+      .chat-input-row {
+        flex-shrink: 0;
+
+        /* Prevents input row from shrinking */
+
+        display: flex;
+
+        gap: 8px;
+
+        margin-top: 8px;
+      }
+
+      .status-message {
+        position: fixed;
+
+        top: 20px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        padding: 10px 20px;
+
+        border-radius: 10px;
+
+        z-index: 100;
+
+        font-weight: 600;
+
+        transition: opacity 0.3s, transform 0.3s;
+
+        opacity: 0;
+      }
+
+      .status-message.show {
+        opacity: 1;
+
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .status-message.error {
+        background-color: #fca5a5;
+
+        /* red-300 */
+
+        color: #7f1d1d;
+
+        /* red-900 */
+      }
+
+      .status-message.success {
+        background-color: #a7f3d0;
+
+        /* emerald-200 */
+
+        color: #064e3b;
+
+        /* emerald-900 */
+      }
+
+      /* =================== Footer =================== */
+
+      footer {
+        padding: 28px 20px;
+
+        text-align: center;
+
+        color: var(--muted);
+
+        font-size: 13px;
+      }
+
+      /* =================== Responsive =================== */
+
+      @media (max-width: 1100px) {
+        .places-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .planner-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .blog-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .wrap {
+          padding: 12px;
+        }
+
+        .hero {
+          min-height: 420px;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .places-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .logo {
+          width: 48px;
+
+          height: 48px;
+        }
+
+        header {
+          flex-direction: column;
+
+          align-items: flex-start;
+
+          gap: 10px;
+        }
+
+        .chat-panel {
+          right: 12px;
+
+          left: 12px;
+
+          bottom: 88px;
+
+          width: auto;
+
+          /* When on small screens, increase chat panel height for better use */
+
+          height: 65vh;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <div class="logo">SJ</div>
+
+          <div>
+            <h1>Soulful Journey</h1>
+
+            <div class="subtitle">
+              Curated routes & local tips — designed for travellers
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn" id="themeBtn">Toggle Theme</button>
+
+          <button class="btn" id="authBtn">Sign in</button>
+
+          <button class="btn primary" id="scrollDiscover">Explore</button>
+        </div>
+      </header>
+
+      <section class="bg-hero hero">
+        <div
+          class="section-inner glass"
+          style="
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <div style="max-width: 640px">
+            <div style="font-weight: 700; font-size: 28px; margin-bottom: 6px">
+              Soulful Journey — Explore India like a local
+            </div>
+
+            <div class="subtitle" style="margin-bottom: 16px">
+              Tailored routes, cultural tips, and immersive stays for foreign
+              travellers. Create your trip, read local stories, and ask our AI
+              guide.
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center">
+              <button class="btn primary" id="startPlanner">Plan a Trip</button>
+
+              <button class="btn" id="learnMore">How it works</button>
+            </div>
+          </div>
+
+          <div style="width: 320px">
+            <div
+              style="
+                background: linear-gradient(
+                  180deg,
+                  rgba(255, 255, 255, 0.02),
+                  transparent
+                );
+                padding: 12px;
+                border-radius: 10px;
+              "
+            >
+              <div style="font-weight: 700; margin-bottom: 6px">
+                Quick Start
+              </div>
+
+              <div class="small" style="margin-bottom: 8px">
+                Sign in to save your visit list & get recommendations.
+              </div>
+
+              <div style="display: flex; gap: 8px">
+                <input
+                  id="heroEmail"
+                  class="input"
+                  placeholder="Email (demo)"
+                  style="flex: 1"
+                />
+
+                <button class="btn" id="heroSignup">Join</button>
+              </div>
+
+              <div class="small" style="margin-top: 8px">
+                No credit card — demo only
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-discover discover" id="discoverSection">
+        <div class="section-inner glass">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <div>
+              <h2 style="margin-bottom: 6px">Discover India</h2>
+
+              <div class="subtitle">
+                Handpicked places with local tips, ratings and easy booking.
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center">
+              <input
+                id="searchPlaces"
+                class="input"
+                placeholder="Search city or place"
+                style="width: 260px"
+              />
+
+              <button class="btn" id="searchBtn">Search</button>
+            </div>
+          </div>
+
+          <div class="places-grid" id="placesGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="bg-planner planner">
+        <div class="section-inner glass">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+              gap: 18px;
+            "
+          >
+            <div style="flex: 1">
+              <h2>Trip Planner</h2>
+
+              <div class="subtitle">
+                Choose dates, add places to your visit list, and build a simple
+                itinerary.
+              </div>
+
+              <div class="planner-grid">
+                <div>
+                  <div
+                    style="
+                      margin-top: 12px;
+                      background: rgba(255, 255, 255, 0.02);
+                      padding: 12px;
+                      border-radius: 10px;
+                    "
+                  >
+                    <div class="calendar-row">
+                      <div style="flex: 1">
+                        <label class="small">Start</label>
+
+                        <input
+                          id="startDate"
+                          type="date"
+                          class="input"
+                          style="width: 100%; margin-top: 6px"
+                        />
+                      </div>
+
+                      <div style="width: 12px"></div>
+
+                      <div style="flex: 1">
+                        <label class="small">End</label>
+
+                        <input
+                          id="endDate"
+                          type="date"
+                          class="input"
+                          style="width: 100%; margin-top: 6px"
+                        />
+                      </div>
+                    </div>
+
+                    <div style="display: flex; gap: 8px; margin-top: 12px">
+                      <button class="btn primary" id="saveDatesBtn">
+                        Save Dates
+                      </button>
+
+                      <button class="btn" id="clearDatesBtn">Clear</button>
+                    </div>
+
+                    <div style="margin-top: 12px">
+                      <label class="small">Notes</label>
+
+                      <textarea
+                        id="planNotes"
+                        class="input"
+                        placeholder="Add a short note..."
+                        style="height: 96px; width: 100%; margin-top: 8px"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 12px">
+                    <h3 style="margin-bottom: 8px">Visit List</h3>
+
+                    <div class="visit-list" id="visitList"></div>
+                  </div>
+                </div>
+
+                <aside style="width: 100%; max-width: 360px">
+                  <div
+                    style="
+                      background: rgba(0, 0, 0, 0.04);
+                      padding: 12px;
+                      border-radius: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                      "
+                    >
+                      <strong>Your Trip</strong>
+
+                      <span class="small">Demo</span>
+                    </div>
+
+                    <div class="small" style="margin-top: 8px">
+                      Dates & selections saved locally (demo). Sign in to
+                      persist to your account.
+                    </div>
+
+                    <div style="margin-top: 10px">
+                      <div style="display: flex; gap: 8px">
+                        <button class="btn primary" id="optimizeRouteBtn">
+                          Optimize Route (AI)
+                        </button>
+                        <button class="btn" id="exportTripBtn">Export</button>
+                        <button class="btn" id="clearTripBtn">
+                          Clear Trip
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      margin-top: 12px;
+                      padding: 12px;
+                      border-radius: 10px;
+                      background: rgba(255, 255, 255, 0.02);
+                    "
+                  >
+                    <strong>Booking</strong>
+
+                    <div class="small" style="margin-top: 8px">
+                      Open Agoda or OYO search for each city from the place
+                      card.
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-blog blog">
+        <div class="section-inner glass">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <div>
+              <h2>Blog & Stories</h2>
+
+              <div class="subtitle">
+                Traveler stories, tips from locals and curated guides.
+              </div>
+            </div>
+
+            <div>
+              <button class="btn" id="openBlogBtn">Write a Story</button>
+            </div>
+          </div>
+
+          <div class="blog-cards" id="blogCards"></div>
+        </div>
+      </section>
+
+      <section class="bg-map map-section">
+        <div class="section-inner glass">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <div>
+              <h2>Map & Directions</h2>
+
+              <div class="subtitle">
+                Click Directions in a place card to center map on that location.
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 8px">
+              <input
+                id="mapSearch"
+                class="input"
+                placeholder="Search map (e.g. Jaipur)"
+              />
+
+              <button class="btn" id="mapSearchBtn">Go</button>
+            </div>
+          </div>
+
+          <div style="margin-top: 14px">
+            <iframe
+              id="mapFrame"
+              class="map-frame"
+              src="https://maps.google.com/maps?q=India&z=5&output=embed"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <div id="globalStatus" class="status-message"></div>
+
+      <div class="chat-widget" id="chatButton" title="Ask our AI guide">💬</div>
+
+      <div id="chatPanel" style="display: none">
+        <div class="chat-panel">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <strong>Travel Guide (AI)</strong>
+
+            <button class="btn" id="closeChat">Close</button>
+          </div>
+
+          <div class="chat-messages" id="chatMessages" aria-live="polite">
+            <div
+              class="bot-message"
+              style="
+                margin-bottom: 8px;
+                max-width: 84%;
+                padding: 8px 10px;
+                border-radius: 10px;
+                font-size: 14px;
+                margin-right: 20%;
+              "
+            >
+              Hello! I'm your AI India travel guide. Ask me about routes,
+              culture, food, or anything else about India!
+            </div>
+          </div>
+
+          <div class="chat-input-row">
+            <input
+              id="chatInput"
+              class="input"
+              placeholder="Ask about visas, weather, routes..."
+              style="flex: 1"
+              onkeydown="if(event.key === 'Enter') qs('#sendChatBtn').click()"
+            />
+
+            <button class="btn primary" id="sendChatBtn">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <template id="signinTemplate">
+        <div
+          class="modal-backdrop"
+          id="signinModal"
+          style="
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 90;
+            background: rgba(0, 0, 0, 0.5);
+          "
+        >
+          <div
+            style="
+              width: 420px;
+              max-width: 90%;
+              background: var(--card);
+              padding: 18px;
+              border-radius: 12px;
+            "
+          >
+            <h3>Account Access</h3>
+
+            <div
+              class="small"
+              id="auth-status-message"
+              style="margin-bottom: 8px; color: var(--muted)"
+            >
+              Enter your email and password to log in or create an account.
+            </div>
+
+            <input
+              id="signinEmail"
+              class="input"
+              placeholder="Email"
+              style="width: 100%; margin-top: 8px"
+            />
+
+            <input
+              id="signinPass"
+              class="input"
+              type="password"
+              placeholder="Password"
+              style="width: 100%; margin-top: 8px"
+            />
+
+            <div
+              style="
+                display: flex;
+                justify-content: flex-end;
+                gap: 8px;
+                margin-top: 12px;
+              "
+            >
+              <button class="btn" id="cancelSignin">Cancel</button>
+
+              <button class="btn primary" id="doLogin">Login</button>
+
+              <button class="btn" id="doSignup">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template id="blogTemplate">
+        <div
+          style="
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 95;
+            background: rgba(0, 0, 0, 0.5);
+          "
+        >
+          <div
+            style="
+              width: 720px;
+              max-width: 90%;
+              background: var(--card);
+              padding: 18px;
+              border-radius: 12px;
+            "
+          >
+            <h3>Write a Story</h3>
+
+            <input
+              id="newBlogTitle"
+              class="input"
+              placeholder="Title"
+              style="width: 100%; margin-top: 8px"
+            />
+
+            <textarea
+              id="newBlogBody"
+              class="input"
+              placeholder="Share your travel story..."
+              style="width: 100%; height: 220px; margin-top: 8px"
+            ></textarea>
+
+            <div
+              style="
+                display: flex;
+                justify-content: flex-end;
+                gap: 8px;
+                margin-top: 12px;
+              "
+            >
+              <button class="btn" id="cancelBlog">Cancel</button>
+
+              <button class="btn primary" id="publishBlog">Publish</button>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <script>
+        /*****************************************
+
+             * Soulful Journey — Single page frontend
+
+             * Fixed Map URL and API endpoint calls.
+
+             *****************************************/
+
+        // The base URL for your running Flask server
+
+        const API_BASE_URL = "http://127.0.0.1:5000/api";
+
+        // ---------- Places Data (Now fetched from backend) ----------
+
+        let PLACES = [];
+
+        // ---------- Utilities ----------
+
+        const qs = (sel) => document.querySelector(sel);
+
+        const qsa = (sel) => Array.from(document.querySelectorAll(sel));
+
+        /**
+
+             * Shows a non-blocking status message at the top of the screen.
+
+             * @param {string} text - The message to display.
+
+             * @param {boolean} isError - True for error (red), false for success (green).
+
+             */
+
+        function showStatusMessage(text, isError = false) {
+          const statusEl = qs("#globalStatus");
+
+          statusEl.textContent = text;
+
+          statusEl.className = "status-message";
+
+          statusEl.classList.add(isError ? "error" : "success");
+
+          // Show the message
+
+          setTimeout(() => statusEl.classList.add("show"), 10);
+
+          // Hide the message after 3 seconds
+
+          setTimeout(() => {
+            statusEl.classList.remove("show");
+
+            // Clear classes after transition
+
+            setTimeout(() => (statusEl.className = "status-message"), 300);
+          }, 3000);
+        }
+
+        // ---------- Theme toggle ----------
+
+        const themeBtn = qs("#themeBtn");
+
+        function applySavedTheme() {
+          if (localStorage.getItem("sj_theme") === "light")
+            document.body.classList.add("light");
+        }
+
+        applySavedTheme();
+
+        themeBtn.addEventListener("click", () => {
+          document.body.classList.toggle("light");
+
+          localStorage.setItem(
+            "sj_theme",
+            document.body.classList.contains("light") ? "light" : "dark"
+          );
+        });
+
+        // ---------- Render places (clean, consistent cards) ----------
+
+        const placesGrid = qs("#placesGrid");
+
+        function getLocalRating(id) {
+          const map = JSON.parse(localStorage.getItem("sj_ratings") || "{}");
+
+          return map[id];
+        }
+
+        function setLocalRating(id, value) {
+          const key = "sj_ratings";
+
+          const map = JSON.parse(localStorage.getItem(key) || "{}");
+
+          map[id] = value;
+
+          localStorage.setItem(key, JSON.stringify(map));
+        }
+
+        function renderPlaces(list = PLACES) {
+          placesGrid.innerHTML = "";
+
+          list.forEach((p) => {
+            const card = document.createElement("div");
+
+            card.className = "place-card";
+
+            // In index.html, inside function renderPlaces(list = PLACES) (around line 869)
+            card.innerHTML = `
+            <div>
+            <div class="place-thumb" style="background-image:url('${p.img}')"
+              onerror="this.style.backgroundImage='url(https://placehold.co/140x140/36454F/ffffff?text=Image+Error)'"></div>
+              <div class="place-meta">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-weight:700">${p.name}</div>
+                  <div class="small">${p.city}</div>
+                </div>
+                  <div class="rating">${(
+                    getLocalRating(p.id) || p.rating
+                  ).toFixed(1)}</div>
+                </div>
+                  <div class="small" style="margin-top:6px">${p.reviews.toLocaleString()} reviews</div>
+              </div>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+              <div class="actions">
+              <button class="btn" data-action="directions" data-lat="${
+              p.coords.lat
+            }" data-lng="${p.coords.lng}">Directions</button>
+
+            <button class="btn" data-action="add" data-id="${
+              p.id
+            }">Add</button>
+
+            <button class="btn" data-action="rate" data-id="${
+              p.id
+            }">Rate</button>
+              <button class="btn" data-action="details" data-name="${
+                  p.name
+                }" data-city="${p.city}">Details (AI)</button>
+                <button class="btn" data-action="book_agoda" data-city="${encodeURIComponent(
+                  p.city
+                )}">Book (Agoda)</button>
+              <button class="btn" data-action="book_oyo" data-city="${encodeURIComponent(
+              p.city
+            )}">Book (OYO)</button>
+
+            </div>
+            </div>
+          `;
+
+            placesGrid.appendChild(card);
+          });
+
+          attachPlaceEvents();
+        }
+
+        
+          function attachPlaceEvents() {
+          qsa(".place-card .btn[data-action]").forEach((btn) => {
+            btn.onclick = () => {
+            const action = btn.dataset.action;
+
+            if (action === "add") addToVisit(btn.dataset.id);
+
+            // ... existing 'rate' logic ...
+
+            // --- REPLACE existing 'book' logic with these three new handlers ---
+            if (action === "details") {
+                const placeName = btn.dataset.name;
+                const city = btn.dataset.city;
+                const prompt = `Tell me the historical significance and must-know visitor information for ${placeName} in ${city}. Keep the answer concise.`;
+
+                // Opens the chat panel and injects the question
+                qs("#chatPanel").style.display = "block";
+                qs("#chatInput").value = prompt;
+                qs("#sendChatBtn").click(); 
+            }
+
+            if (action === "book_agoda") {
+                const city = decodeURIComponent(btn.dataset.city);
+                const agoda = `https://www.agoda.com/search?city=${encodeURIComponent(city)}`;
+                window.open(agoda, "_blank");
+            }
+
+            // In index.html, inside function attachPlaceEvents() (around line 970)
+
+            if (action === "book_oyo") {
+            const city = decodeURIComponent(btn.dataset.city);
+            // CORRECTED: Use the standard OYO search URL format
+            const oyo = `https://www.oyorooms.com/search?query=${encodeURIComponent(city)}`;
+            window.open(oyo, "_blank");
+            }
+            // --- END NEW HANDLERS ---
+
+            if (action === "directions") {
+                setMap(btn.dataset.lat, btn.dataset.lng);
+                scrollToMap();
+            }
+        };
+    });
+}
+
+        // ---------- Visit list ----------
+
+        function getVisit() {
+          return JSON.parse(localStorage.getItem("sj_visit") || "[]");
+        }
+
+        function saveVisit(v) {
+          localStorage.setItem("sj_visit", JSON.stringify(v));
+          renderVisitList();
+        }
+
+        function updateVisitItemDate(id, date) {
+          const v = getVisit();
+          const item = v.find((x) => x.id === id);
+          if (item) {
+            item.date = date; // Add the date property
+            saveVisit(v);
+          }
+        }
+
+        function addToVisit(id) {
+          const p = PLACES.find((x) => x.id === id);
+
+          if (!p) return;
+
+          const v = getVisit();
+
+          if (v.find((x) => x.id === id)) {
+            showStatusMessage("Already in visit list.", true);
+
+            return;
+          }
+
+          v.push({ id: p.id, name: p.name, city: p.city });
+
+          saveVisit(v);
+
+          showStatusMessage(`${p.name} added to your Visit List.`);
+        }
+
+        function removeFromVisit(id) {
+          saveVisit(getVisit().filter((x) => x.id !== id));
+
+          const p = PLACES.find((x) => x.id === id);
+
+          if (p) showStatusMessage(`${p.name} removed.`);
+        }
+
+        // In index.html, REPLACE the entire function starting around line 1039
+function renderVisitList() {
+    const el = qs("#visitList");
+    el.innerHTML = "";
+
+    const items = getVisit();
+
+    if (items.length === 0) {
+        el.innerHTML =
+            '<div class="small">No places yet — add from Discover.</div>';
+        return;
+    }
+
+    items.forEach((it) => {
+        const d = document.createElement("div");
+        d.className = "visit-item";
+        const place = PLACES.find((x) => x.id === it.id);
+        const lat = place?.coords.lat || "";
+        const lng = place?.coords.lng || "";
+
+        // Retrieve start date from planner to set as default if no date is set
+        const plan = JSON.parse(localStorage.getItem("sj_planner") || "{}");
+        const defaultDate = plan.start || "";
+
+        d.innerHTML = `
+            <div style="flex: 1;">
+                <strong>${it.name}</strong>
+                <div class="small">${it.city}</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <input type="date" class="input small date-picker" data-id="${
+                    it.id
+                }" 
+                       value="${it.date || defaultDate}" 
+                       style="width: 130px; padding: 6px 8px; font-size: 13px;">
+                <button class="btn" data-id="${
+                    it.id
+                }" data-action="goto" data-lat="${lat}" data-lng="${lng}">Go</button>
+                <button class="btn ghost" data-id="${
+                    it.id
+                }" data-action="rem">Remove</button>
+            </div>
+        `;
+
+        el.appendChild(d);
+    });
+
+    // 🌟🌟🌟 FIX: ADDED DATE CHANGE LISTENER 🌟🌟🌟
+    el.querySelectorAll(".date-picker").forEach((input) => {
+        input.onchange = () => {
+            updateVisitItemDate(input.dataset.id, input.value);
+            showStatusMessage(
+                "Date saved for " +
+                items.find((i) => i.id === input.dataset.id).name
+            );
+            // Re-render to ensure sorting/display updates if needed
+            renderVisitList(); 
+        };
+    });
+    // 🌟🌟🌟 END FIX 🌟🌟🌟
+
+    // Existing button listeners
+    el.querySelectorAll("button[data-action]").forEach((b) => {
+        b.onclick = () => {
+            const id = b.dataset.id;
+            const a = b.dataset.action;
+
+            if (a === "rem") removeFromVisit(id);
+
+            if (a === "goto") {
+                const p = PLACES.find((x) => x.id === id);
+
+                if (p) {
+                    setMap(p.coords.lat, p.coords.lng);
+                    scrollToMap();
+                }
+            }
+        };
+    });
+}
+
+        // ---------- Search ----------
+
+        qs("#searchBtn").addEventListener("click", () => {
+          const q = (qs("#searchPlaces").value || "").trim().toLowerCase();
+
+          if (!q) return renderPlaces();
+
+          const filtered = PLACES.filter(
+            (p) =>
+              p.name.toLowerCase().includes(q) ||
+              p.city.toLowerCase().includes(q)
+          );
+
+          renderPlaces(filtered.length ? filtered : []);
+        });
+
+        // ---------- Dates & planner ----------
+
+        qs("#saveDatesBtn").addEventListener("click", () => {
+          const s = qs("#startDate").value,
+            e = qs("#endDate").value,
+            notes = qs("#planNotes").value || "";
+
+          if (!s || !e)
+            return showStatusMessage(
+              "Please pick both start and end dates.",
+              true
+            );
+
+          localStorage.setItem(
+            "sj_planner",
+            JSON.stringify({ start: s, end: e, notes })
+          );
+
+          showStatusMessage("Dates and notes saved locally.");
+        });
+
+        qs("#clearDatesBtn").addEventListener("click", () => {
+          localStorage.removeItem("sj_planner");
+
+          qs("#startDate").value = "";
+
+          qs("#endDate").value = "";
+
+          qs("#planNotes").value = "";
+
+          showStatusMessage("Dates cleared.");
+        });
+        // ... existing code (around line 995)
+
+        // Removed confirm()
+        qs("#clearTripBtn").addEventListener("click", () => {
+          localStorage.removeItem("sj_visit");
+          localStorage.removeItem("sj_planner");
+          renderVisitList();
+          showStatusMessage("All trip data cleared.");
+        });
+
+        // In index.html, inside the <script> block (REPLACE the entire function around line 1017)
+        qs("#exportTripBtn").addEventListener("click", () => {
+          const visitList = getVisit();
+          if (visitList.length === 0) {
+            return showStatusMessage(
+              "Your Visit List is empty. Add places first!",
+              true
+            );
+          }
+
+          // 1. Group the visit list by date and city
+          const itinerary = visitList
+            .sort((a, b) => {
+              // Sort unscheduled items last
+              if (!a.date) return 1;
+              if (!b.date) return -1;
+              return new Date(a.date) - new Date(b.date);
+            })
+            .reduce((acc, curr) => {
+              const date = curr.date || "Unscheduled";
+              if (!acc[date]) {
+                acc[date] = {};
+              }
+              if (!acc[date][curr.city]) {
+                acc[date][curr.city] = [];
+              }
+              acc[date][curr.city].push(curr.name);
+              return acc;
+            }, {});
+
+          // 2. Build the HTML content
+          let html =
+            "<h2 style='color:#ff8a00; border-bottom: 2px solid #eee; padding-bottom: 10px;'>Soulful Journey - Trip Itinerary</h2>";
+
+          for (const date in itinerary) {
+            html += `<h3 style='margin-top: 25px; font-weight: 700;'>📅 ${date}</h3>`;
+            for (const city in itinerary[date]) {
+              html += `<div style="margin-left: 15px; margin-top: 5px;"><strong>🏙️ ${city}</strong>: ${itinerary[
+                date
+              ][city].join(", ")}</div>`;
+            }
+          }
+
+          // 3. Open a new window and print
+          const printWindow = window.open("", "_blank");
+          printWindow.document.write(
+            "<html><head><title>Trip Itinerary</title><style>body{font-family: 'Inter', sans-serif; margin: 20px;} h2{color:#ff8a00;} h3{border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 15px;}</style></head><body>"
+          );
+          printWindow.document.write(html);
+          printWindow.document.write("</body></html>");
+          printWindow.document.close();
+          printWindow.focus(); // Focus the window
+          printWindow.print(); // Trigger the print dialog
+
+          showStatusMessage("Itinerary prepared for printing/PDF export.");
+        });
+
+        // Removed confirm()
+
+        qs("#clearTripBtn").addEventListener("click", () => {
+          localStorage.removeItem("sj_visit");
+
+          localStorage.removeItem("sj_planner");
+
+          renderVisitList();
+
+          showStatusMessage("All trip data cleared.");
+        });
+
+        async function loadBlogsFromServer() {
+          try {
+            const response = await fetch(`${API_BASE_URL}/blogs`);
+            if (!response.ok) throw new Error("Failed to load blogs");
+            const posts = await response.json();
+            renderBlogs(posts);
+          } catch (err) {
+            console.error("Blog Fetch Error:", err);
+            showStatusMessage("Could not load blogs from server.", true);
+          }
+        }
+
+        // ---------- Blog (local demo) ----------
+
+        function getBlogs() {
+          return JSON.parse(localStorage.getItem("sj_blogs") || "[]");
+        }
+
+        // In index.html, inside the <script> block (REPLACE the entire function around line 1083)
+function renderBlogs(posts = []) {
+    const container = qs("#blogCards");
+    container.innerHTML = "";
+
+    if (posts.length === 0) {
+        container.innerHTML =
+            '<div class="small">No stories yet — share a trip experience!</div>';
+        return;
+    }
+
+    posts.forEach((p) => {
+        const c = document.createElement("div");
+        c.className = "blog-card";
+        c.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <strong>${p.title}</strong>
+                <span class="small">${new Date(
+                    p.date
+                ).toLocaleDateString()}</span>
+            </div>
+            <p class="small" style="margin-top:8px">
+                ${p.body.length > 180 ? p.body.slice(0, 180) + "..." : p.body}
+            </p>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+                <button class="btn like-btn" data-id="${p.id}" style="padding: 6px 10px;">
+                    👍 ${p.likes || 0}
+                </button>
+                <button class="btn share-btn" data-title="${p.title}" style="padding: 6px 10px;">
+                    🔗 Share
+                </button>
+            </div>
+        `;
+        container.appendChild(c);
+    });
+
+    // 1. Like Button Handler
+    container.querySelectorAll(".like-btn").forEach((btn) => {
+        btn.onclick = async () => {
+            const postId = btn.dataset.id;
+            try {
+                const response = await fetch(`${API_BASE_URL}/blog/like/${postId}`, { method: "POST" });
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    btn.innerHTML = `👍 ${data.likes}`;
+                    showStatusMessage("Post Liked!");
+                } else {
+                    showStatusMessage("Failed to like post.", true);
+                }
+            } catch (e) {
+                showStatusMessage("Network error liking post. Check server console.", true);
+            }
+        };
+    });
+
+    // 2. Share Button Handler (using Clipboard API)
+    container.querySelectorAll(".share-btn").forEach((btn) => {
+        btn.onclick = () => {
+            const title = btn.dataset.title;
+            // Note: window.location.href gives the user's current URL
+            const url = window.location.href; 
+            const shareText = `Check out this travel story: "${title}" on Soulful Journey! ${url}`;
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showStatusMessage("Share link copied to clipboard!");
+                }).catch(err => {
+                    showStatusMessage("Failed to copy link. Try again.", true);
+                });
+            } else {
+                showStatusMessage("Your browser doesn't support automatic copying.", true);
+            }
+        };
+    });
+}
+
+        qs("#openBlogBtn").addEventListener("click", () => showBlogModal());
+
+        // In index.html, inside the <script> tags
+
+        // ... (Your existing showDescriptionModal function, if you added it, remains here) ...
+
+        function showBlogModal() {
+          const tpl = document
+            .getElementById("blogTemplate")
+            .content.cloneNode(true);
+
+          const modal = tpl.querySelector("div");
+
+          document.body.appendChild(modal);
+
+          const newBlogTitle = modal.querySelector("#newBlogTitle");
+
+          const newBlogBody = modal.querySelector("#newBlogBody");
+
+          modal.querySelector("#cancelBlog").onclick = () => modal.remove();
+
+          // --- UPDATED LOGIC TO SAVE TO BACKEND ---
+
+          modal.querySelector("#publishBlog").onclick = async () => {
+            const title = newBlogTitle.value.trim();
+
+            const body = newBlogBody.value.trim();
+
+            if (!title || !body) {
+              return showStatusMessage(
+                "Please fill both the title and body before publishing.",
+                true
+              );
+            }
+
+            modal.querySelector("#publishBlog").disabled = true;
+
+            try {
+              const response = await fetch(`${API_BASE_URL}/blog/publish`, {
+                method: "POST",
+
+                headers: { "Content-Type": "application/json" },
+
+                body: JSON.stringify({ title, body }),
+              });
+
+              const data = await response.json();
+
+              if (response.ok && data.success) {
+                // Remove existing local storage logic, as we now fetch data.
+
+                // We will rely on fetching all posts to update the list later.
+
+                modal.remove();
+
+                // Refresh the blog list to show the new post
+
+                // NOTE: You would need a fetch endpoint for all blogs too. (See next point)
+
+                // renderBlogs();
+
+                await loadBlogsFromServer();
+                showStatusMessage(
+                  "Story published successfully to the database!"
+                );
+              } else {
+                showStatusMessage(
+                  data.message || "Error publishing blog post.",
+                  true
+                );
+              }
+            } catch (e) {
+              showStatusMessage(
+                "Network Error: Could not connect to backend server.",
+                true
+              );
+            } finally {
+              modal.querySelector("#publishBlog").disabled = false;
+            }
+          };
+        }
+
+        // ---------- Map FIX: Using the correct URL structure for embedding Google Maps ----------
+
+        // The map iframe URL must use 'maps.google.com/maps?q='
+
+        // and include '&output=embed' to be embeddable.
+
+        function setMap(lat, lng) {
+          // Correct Google Maps embed URL for coordinates
+
+          qs(
+            "#mapFrame"
+          ).src = `https://maps.google.com/maps?q=${lat},${lng}&z=14&output=embed`;
+        }
+
+        qs("#mapSearchBtn").addEventListener("click", () => {
+          const q = (qs("#mapSearch").value || "").trim();
+
+          if (!q)
+            return showStatusMessage(
+              'Please type a place (e.g., "Jaipur") to search on the map.',
+              true
+            );
+
+          // Correct Google Maps embed URL for search query
+
+          qs(
+            "#mapFrame"
+          ).src = `https://maps.google.com/maps?q=${encodeURIComponent(
+            q
+          )}&output=embed`;
+
+          scrollToMap();
+        });
+
+        function scrollToMap() {
+          window.scrollTo({
+            top: document.querySelector(".map-section").offsetTop - 20,
+            behavior: "smooth",
+          });
+        }
+
+        // ---------- Floating Chat Widget (AI Integration) ----------
+
+        const chatButton = qs("#chatButton"),
+          chatPanelWrapper = qs("#chatPanel");
+
+        chatButton.addEventListener("click", () => {
+          const panel = qs("#chatPanel");
+
+          panel.style.display =
+            panel.style.display === "block" ? "none" : "block";
+
+          updateChatScroll();
+        });
+
+        qs("#sendChatBtn").addEventListener("click", async () => {
+          const txt = qs("#chatInput").value.trim();
+
+          if (!txt) return;
+
+          appendChatMessage(txt, "user");
+
+          qs("#chatInput").value = "";
+
+          qs("#sendChatBtn").disabled = true;
+
+          qs("#chatInput").disabled = true;
+
+          const loader = appendChatMessage("AI is thinking...", "bot");
+
+          try {
+            // --- BEGIN AI CHAT API CALL ---
+
+            // Correctly prepend API_BASE_URL
+
+            const response = await fetch(`${API_BASE_URL}/chat`, {
+              method: "POST",
+
+              headers: { "Content-Type": "application/json" },
+
+              body: JSON.stringify({
+                message: txt,
+              }),
+            });
+
+            const data = await response.json();
+
+            removeChatNode(loader);
+
+            if (response.ok && data.reply) {
+              appendChatMessage(data.reply, "bot");
+            } else {
+              // Handle error response from Flask backend
+
+              const errorMessage =
+                data.reply ||
+                `Server Error (${response.status}). Is the server running?`;
+
+              appendChatMessage(errorMessage, "bot");
+
+              showStatusMessage("Chat failed. Check backend logs.", true);
+            }
+
+            // --- END AI CHAT API CALL ---
+          } catch (error) {
+            removeChatNode(loader);
+
+            // Added a clearer error message for network issues
+
+            appendChatMessage(
+              "Network connection failed. Could not reach the Flask server (port 5000).",
+              "bot"
+            );
+
+            showStatusMessage("Network error — please try again later.", true);
+          } finally {
+            qs("#sendChatBtn").disabled = false;
+
+            qs("#chatInput").disabled = false;
+
+            qs("#chatInput").focus();
+          }
+        });
+
+        function appendChatMessage(text, who = "bot") {
+          const box = qs("#chatMessages");
+
+          const d = document.createElement("div");
+
+          d.style.marginBottom = "8px";
+
+          d.style.maxWidth = "84%";
+
+          d.style.padding = "8px 10px";
+
+          d.style.borderRadius = "10px";
+
+          d.style.fontSize = "14px";
+
+          d.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
+
+          // --- START FIX: Apply correct colors and background based on theme ---
+
+          const isLightMode = document.body.classList.contains("light");
+
+          if (who === "user") {
+            d.style.alignSelf = "flex-end";
+
+            d.style.background =
+              "linear-gradient(90deg,var(--accent1),var(--accent2))";
+
+            d.style.color = "#08101a"; // User text is always dark/readable on the accent background
+
+            d.style.marginLeft = "auto"; // Use auto to push it right
+          } else {
+            d.style.alignSelf = "flex-start";
+
+            d.style.color = "var(--text)"; // Bot text uses the theme's main text color (white in dark, black in light)
+
+            d.style.marginRight = "auto"; // Use auto to keep it left
+
+            if (isLightMode) {
+              d.style.background = "rgba(0, 0, 0, 0.08)"; // Light gray background for light mode
+            } else {
+              // **FIXED CONTRAST:** Use a slightly darker, more visible background for the bot message in dark mode
+
+              d.style.background = "rgba(255, 255, 255, 0.15)";
+            }
+          }
+
+          // --- END FIX ---
+
+          d.textContent = text;
+
+          box.appendChild(d);
+
+          box.scrollTop = box.scrollHeight;
+
+          return d;
+        }
+
+        function removeChatNode(node) {
+          if (node && node.parentNode) node.parentNode.removeChild(node);
+
+          updateChatScroll();
+        }
+
+        function updateChatScroll() {
+          const m = qs("#chatMessages");
+
+          if (m) m.scrollTop = m.scrollHeight;
+        }
+
+        qs("#closeChat")?.addEventListener("click", () => {
+          qs("#chatPanel").style.display = "none";
+        });
+
+        // ---------- Sign-in/Sign-up Logic (Integrated with Flask Backend) ----------
+
+        const authBtn = qs("#authBtn"); // Changed from #signinBtn to #authBtn for clarity
+
+        authBtn.addEventListener("click", () => {
+          // If user is logged in, this becomes a Logout button
+
+          if (authBtn.textContent.includes("Logged in:")) {
+            handleLogout();
+
+            return;
+          }
+
+          const tpl = document
+            .getElementById("signinTemplate")
+            .content.cloneNode(true);
+
+          document.body.appendChild(tpl);
+
+          const modal = qs("#signinModal");
+
+          const authStatus = qs("#auth-status-message");
+
+          const emailInput = qs("#signinEmail");
+
+          const passInput = qs("#signinPass");
+
+          qs("#cancelSignin").addEventListener("click", () => modal.remove());
+
+          // Generic function to handle both Login and Signup
+
+          async function handleAuthAction(endpoint) {
+            const email = emailInput.value.trim();
+
+            const password = passInput.value.trim();
+
+            const action = endpoint === "login" ? "Logging in" : "Signing up";
+
+            if (!email || !password) {
+              authStatus.textContent = `Please enter both email and password to ${endpoint}.`;
+
+              authStatus.style.color = "red";
+
+              return;
+            }
+
+            authStatus.textContent = `${action}...`;
+
+            authStatus.style.color = "orange";
+
+            try {
+              // Correctly prepend API_BASE_URL
+
+              const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+                method: "POST",
+
+                headers: { "Content-Type": "application/json" },
+
+                body: JSON.stringify({ email, password }),
+              });
+
+              const data = await response.json();
+
+              if (response.ok && data.success) {
+                // Store user info (or success status) in local storage for UI persistence
+
+                localStorage.setItem(
+                  "sj_user",
+                  JSON.stringify({ email: email })
+                );
+
+                updateSignedInUI();
+
+                showStatusMessage(data.message);
+
+                modal.remove();
+              } else {
+                // Show error from backend (e.g., "Invalid credentials", "User already exists")
+
+                authStatus.textContent =
+                  data.message ||
+                  `Error ${response.status}: Failed to process request.`;
+
+                authStatus.style.color = "red";
+
+                showStatusMessage(
+                  data.message || "Authentication Failed.",
+                  true
+                );
+              }
+            } catch (e) {
+              authStatus.textContent =
+                "Network Error: Check your Flask server status (running on 5000?).";
+
+              authStatus.style.color = "red";
+
+              showStatusMessage(
+                "Network error: Could not connect to server.",
+                true
+              );
+            }
+          }
+
+          qs("#doLogin").addEventListener("click", () =>
+            handleAuthAction("login")
+          );
+
+          qs("#doSignup").addEventListener("click", () =>
+            handleAuthAction("register")
+          ); // Use 'register' endpoint
+        });
+
+        async function handleLogout() {
+          try {
+            // Correctly prepend API_BASE_URL
+
+            const response = await fetch(`${API_BASE_URL}/logout`, {
+              method: "POST",
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+              localStorage.removeItem("sj_user"); // Clear local user data
+
+              updateSignedInUI();
+
+              showStatusMessage("You have been logged out.");
+            } else {
+              showStatusMessage("Logout failed.", true);
+            }
+          } catch (e) {
+            showStatusMessage("Network error during logout.", true);
+          }
+        }
+
+        function updateSignedInUI() {
+          const user = JSON.parse(localStorage.getItem("sj_user") || "null");
+
+          if (user) {
+            // Change the button text to show the logged-in status
+
+            qs("#authBtn").textContent = `Logged in: ${
+              user.email.split("@")[0]
+            }`;
+
+            qs("#authBtn").classList.remove("btn");
+
+            qs("#authBtn").classList.add("btn", "primary");
+          } else {
+            qs("#authBtn").textContent = "Sign in";
+
+            qs("#authBtn").classList.remove("primary");
+
+            qs("#authBtn").classList.add("btn");
+          }
+        }
+
+        updateSignedInUI();
+
+        // ---------- Helpers & initial render ----------
+
+        qs("#startPlanner").addEventListener("click", () => {
+          window.scrollTo({
+            top: document.querySelector(".planner").offsetTop - 20,
+            behavior: "smooth",
+          });
+        });
+
+        qs("#scrollDiscover").addEventListener("click", () => {
+          window.scrollTo({
+            top: document.querySelector("#discoverSection").offsetTop - 20,
+            behavior: "smooth",
+          });
+        });
+
+        // Removed alert() from heroSignup
+
+        qs("#heroSignup").addEventListener("click", () => {
+          const e = qs("#heroEmail").value.trim();
+
+          if (!e) return showStatusMessage("Enter email to join.", true);
+
+          // In a real app, this would trigger an an API call. Here we simulate a demo sign-up.
+
+          localStorage.setItem("sj_user", JSON.stringify({ email: e }));
+
+          updateSignedInUI();
+
+          showStatusMessage("Joined (demo mode) and signed in!");
+        });
+
+        async function init() {
+          // 1. Fetch places from Backend API
+
+          try {
+            const response = await fetch(`${API_BASE_URL}/places`);
+
+            if (response.ok) {
+              PLACES = await response.json();
+
+              console.log("Places loaded from database:", PLACES.length);
+            } else {
+              showStatusMessage(
+                "Failed to load places from server. Check console.",
+                true
+              );
+            }
+          } catch (e) {
+            showStatusMessage(
+              "Network error loading places. Is the Flask server running?",
+              true
+            );
+
+            console.error("Network or API Error:", e);
+          }
+
+          // 2. Render the UI (uses the now populated PLACES array)
+
+          renderPlaces();
+
+          renderVisitList();
+
+          await loadBlogsFromServer();
+
+          // 3. Load planner data if exists
+
+          const plan = JSON.parse(localStorage.getItem("sj_planner") || "null");
+
+          if (plan) {
+            qs("#startDate").value = plan.start || "";
+
+            qs("#endDate").value = plan.end || "";
+
+            qs("#planNotes").value = plan.notes || "";
+          }
+        }
+
+        init();
+
+        // ---------- Accessibility: keyboard toggle chat (Enter on chatButton) ----------
+
+        qs("#chatButton").addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+
+            qs("#chatButton").click();
+          }
+        });
+        // In your <script> section:
+
+        qs("#optimizeRouteBtn").addEventListener("click", () => {
+          const visitList = getVisit();
+          const plan = JSON.parse(localStorage.getItem("sj_planner") || "{}");
+
+          if (visitList.length === 0) {
+            return showStatusMessage(
+              "Add places to your Visit List first.",
+              true
+            );
+          }
+
+          const places = visitList
+            .map((p) => `${p.name} (${p.city})`)
+            .join(", ");
+          const tripDates =
+            plan.start && plan.end
+              ? `from ${plan.start} to ${plan.end}`
+              : "with flexible dates";
+
+          const prompt = `Please create a daily itinerary for my trip ${tripDates}. My current list of places is: ${places}. Group the places logically by location/city to minimize travel time.`;
+
+          // Opens the chat panel and sends the request
+          qs("#chatPanel").style.display = "block";
+          qs("#chatInput").value = prompt;
+          qs("#sendChatBtn").click();
+        });
+        // ---------- Final note ----------
+
+        console.log(
+          "Soulful Journey frontend loaded — integrated with Flask/Gemini chat."
+        );
+      </script>
+    </div>
+  </body>
+</html>
