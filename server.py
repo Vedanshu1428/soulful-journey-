@@ -76,19 +76,44 @@ class Place(db.Model):
             "img": self.img_url
         }
 
+def auto_seed_places():
+    if Place.query.first():
+        print("Places already exist. Skipping auto-seed.")
+        return
+
+    print("Auto-seeding demo places...")
+
+    initial_data = [
+        { "slug": 'taj', "name": 'Taj Mahal', "city": 'Agra', "rating": 4.9, "reviews": 12451, "lat": 27.1751, "lng": 78.0421, "img": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/62/a7/48/caption.jpg?w=1200&h=-1&s=1" },
+        { "slug": 'hawa', "name": 'Hawa Mahal', "city": 'Jaipur', "rating": 4.6, "reviews": 5312, "lat": 26.9239, "lng": 75.8267, "img": "https://miro.medium.com/v2/1*fYA-b-KA9UUqPL2OsDYkQw.png" },
+        { "slug": 'varanasi', "name": 'Ganges Ghats', "city": 'Varanasi', "rating": 4.7, "reviews": 8200, "lat": 25.3176, "lng": 82.9739, "img": "https://i0.wp.com/www.tusktravel.com/blog/wp-content/uploads/2019/09/Popular-Ghats-in-Varanasi.jpg" },
+    ]
+
+    for item in initial_data:
+        db.session.add(
+            Place(
+                slug=item['slug'],
+                name=item['name'],
+                city=item['city'],
+                rating=item['rating'],
+                reviews=item['reviews'],
+                lat=item['lat'],
+                lng=item['lng'],
+                img_url=item['img']
+            )
+        )
+
+    db.session.commit()
+    print("Demo places inserted.")
+
 # --- INITIALIZATION ------------------------------------------------------------
 
 def init_db():
-    print("INFO: Attempting database connection...")
-    try:
-        with app.app_context():
-            db.create_all()
-        print("SUCCESS: Database initialized.")
-    except Exception as e:
-        print(f"FATAL: Database error: {e}")
-
-with app.app_context():
-    init_db()
+    print("INFO: Initializing database...")
+    with app.app_context():
+        db.create_all()
+        auto_seed_places()
+    print("SUCCESS: Database ready.")
 
 # --- PLACES ROUTES -------------------------------------------------------------
 
