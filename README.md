@@ -32,8 +32,13 @@ git clone https://github.com/Vedanshu1428/soulful-journey-.git
    DB_URI=your_database_uri
    GEMINI_API_KEY=your_api_key
    ```
+   
+4. Install dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4. Run the server
+5. Run the server
    ```bash
    python server.py
    ```
