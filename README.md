@@ -15,6 +15,9 @@ allows users to read and write blogs, and chat with an AI travel guide.
 - HTML, CSS, JavaScript
 - Google Gemini API
 
+### Live Website
+https://soulful-journey-backend.onrender.com
+
 ## How to Run Locally
 
 1. Clone the repo
